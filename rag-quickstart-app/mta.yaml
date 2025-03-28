@@ -172,7 +172,7 @@ resources:
     type: org.cloudfoundry.managed-service
     parameters:
       service: aicore
-      service-name: aicoretestextend
+      service-name: <ai-core-service-instance-name>
       service-plan: extended
 
 # ------------------------------------------------------------

@@ -87,6 +87,16 @@ Refer the [documentation](https://help.sap.com/docs/sap-ai-core/sap-ai-core-serv
     cf create-service-key <ai-core-service-instance-name> SharedDevKey   
     cds bind -2 <ai-core-service-instance-name>:SharedDevKey   
   ```   
+  - For BTP deployment, change the SAP AI Core service instance name in mta.yaml:  
+  ```  
+    - name: aicoretestextend
+# ------------------------------------------------------------
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: aicore
+      service-name: <ai-core-service-instance-name>
+      service-plan: extended
+  ```   
 
 
 ## Getting started
@@ -156,12 +166,31 @@ password: initial
   ```
   sessionStorage.setItem("isDeployedVersion", "true");
   ```
+2. Delete the gen folder:
 
-2. Run the following command to deploy server:
+```
+rm -rf gen
+```
 
-`cds build --production`
+3. Run npm install as follows:
 
-3. Build and deploy mtar
+```
+npm install --save
+```
+
+4. Run the following command to deploy server:
+
+```
+cds build --production
+```
+
+5. Copy the cap-llm-plugin folder into gen/srv:
+
+```
+cp -r cap-llm-plugin gen/srv
+```
+
+6. Build and deploy mtar
 
 ```
 mbt build
